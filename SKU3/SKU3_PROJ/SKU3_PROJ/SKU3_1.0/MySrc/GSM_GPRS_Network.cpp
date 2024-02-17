@@ -120,29 +120,14 @@ void Get_Local_Time(void)
 		}
 		
 
-		
-		
-
-		//AT+CHTPSERV=”ADD”,”www.google.com”,80,1
-		
-		// 	_kSERIAL_AT.println(F("AT+CHTPSERV=\"ADD\",\"www.google.com\",80,1"));
-		// 	Send_AT_Command(NULL, "OK",  NULL,5000,2);
-		
-		// 	_kSERIAL_AT.println(F("AT+CHTPUPDATE"));
-		// 	Send_AT_Command(NULL, "OK",  NULL,5000,2);
-		
-		// 	_kSERIAL_AT.println(F("AT+CTZU=1"));
-		// 	Send_AT_Command(NULL, "OK",  NULL,3000,2);
 		Reset_Buffer();
 		_kSERIAL_AT.println(F("AT+CCLK?"));
 		Send_AT_Command(NULL, "OK", NULL,2000,2);
 		
-		//if(strstr((char *)_gRecvd_Data,"+CCLK") != 0)
 		if(strstr((char *)_gPub_Buff,"+CCLK") != 0)
 		{
 			for(i=0;i<20;i++)
 			{
-				//if(_gRecvd_Data[i] == '+' && _gRecvd_Data[i+5] == ':')
 				if(_gPub_Buff[i] == '+' && _gPub_Buff[i+5] == ':')
 				{
 					break;
@@ -155,27 +140,17 @@ void Get_Local_Time(void)
 		}
 		
 		/*************************************************** UPDATE TIME AND DATE *********************************************/
-		
-// 		_sRuble_Parameters.Update_Local_Time[0] = ((_gRecvd_Data[i+17]-0x30)*10) + (_gRecvd_Data[i+18]-0x30);    /* hold hour */
-// 		_sRuble_Parameters.Update_Local_Time[1] = ((_gRecvd_Data[i+20]-0X30)*10) + (_gRecvd_Data[i+21]-0X30);    /* hold minute */
-// 		_sRuble_Parameters.Update_Local_Time[2] = ((_gRecvd_Data[i+23]-0X30)*10) + (_gRecvd_Data[i+24]-0X30);    /* hold second */
-		
 		_sRuble_Parameters.Update_Local_Time[0] = ((_gPub_Buff[i+17]-0x30)*10) + (_gPub_Buff[i+18]-0x30);    /* hold hour */
 		_sRuble_Parameters.Update_Local_Time[1] = ((_gPub_Buff[i+20]-0X30)*10) + (_gPub_Buff[i+21]-0X30);    /* hold minute */
 		_sRuble_Parameters.Update_Local_Time[2] = ((_gPub_Buff[i+23]-0X30)*10) + (_gPub_Buff[i+24]-0X30);    /* hold second */
 		
 		_sRuble_Parameters.Current_Time_In_Sec = (unsigned long int)((unsigned long int)_sRuble_Parameters.Update_Local_Time[0]*3600)+(unsigned long int)((unsigned long int)_sRuble_Parameters.Update_Local_Time[1]*60) +(unsigned long int)((unsigned long int)_sRuble_Parameters.Update_Local_Time[2]) ;
-		//_sRuble_Parameters.Current_Time_In_Sec = 36000;
 		
 		if(_sRuble_Parameters.Debug_Mode == _kSET)
 		{
 			Serial.println();
 			_kSERIAL_MON_PRINT_NUM((unsigned long int)_sRuble_Parameters.Current_Time_In_Sec);
 		}
-		
-// 		_sRuble_Parameters.Update_Local_Date[2] = ((_gRecvd_Data[i+8]-0X30)*10) +  (_gRecvd_Data[i+9]-0X30);      /* hold date */
-// 		_sRuble_Parameters.Update_Local_Date[1] = ((_gRecvd_Data[i+11]-0X30)*10) + (_gRecvd_Data[i+12]-0X30);     /* hold month */
-// 		_sRuble_Parameters.Update_Local_Date[0] = ((_gRecvd_Data[i+14]-0X30)*10) + (_gRecvd_Data[i+15]-0X30);
 		
 		_sRuble_Parameters.Update_Local_Date[2] = ((_gPub_Buff[i+8]-0X30)*10) +  (_gPub_Buff[i+9]-0X30);      /* hold date */
 		_sRuble_Parameters.Update_Local_Date[1] = ((_gPub_Buff[i+11]-0X30)*10) + (_gPub_Buff[i+12]-0X30);     /* hold month */

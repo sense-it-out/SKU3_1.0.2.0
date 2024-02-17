@@ -226,12 +226,6 @@ int main(void)
 				//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
 			}
 		}
-		
-		//Publish_Data();
-		
-		
-		
-		//Update_Indication();	
 			
 	}
         

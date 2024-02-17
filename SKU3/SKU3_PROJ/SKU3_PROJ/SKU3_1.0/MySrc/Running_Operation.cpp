@@ -4047,17 +4047,12 @@ void Pub_Sub_Data(char* topic, unsigned char * payload, unsigned int len, unsign
 			{
 				case _kSET:
 				{
-					//jsondata.clear();
 					unsigned char temp_topic[40];
 					send_feedback = _kRESET;
-					//memset((char *)_gPub_Buff,0,sizeof(_gPub_Buff));
 					memset((char *)_gRecvd_Data,0,sizeof(_gRecvd_Data));
-					//sprintf((char *)_gPub_Buff,"{\"success\": \"true\"}");
 					sprintf((char *)_gRecvd_Data,"{\"success\": \"true\"}");
 					memset((char *)temp_topic,0,sizeof(temp_topic));
 					sprintf((char *)temp_topic,"SICCA/FEEDBACK/%s",_sRuble_Parameters.Ruble_ID);
-					//_kMQTT_PUB((unsigned char *)temp_topic,(unsigned char *)_gPub_Buff);
-					//_kMQTT_PUB((unsigned char *)temp_topic,(unsigned char *)_gPub_Buff);
 					_kMQTT_PUB((unsigned char *)temp_topic,(unsigned char *)_gRecvd_Data);
 					memset((char *)_gPub_Buff,0,sizeof(_gPub_Buff));
 					return;

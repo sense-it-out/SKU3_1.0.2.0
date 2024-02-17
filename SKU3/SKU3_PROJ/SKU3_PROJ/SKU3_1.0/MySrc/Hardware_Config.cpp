@@ -1310,14 +1310,14 @@ bool Is_MQTT_Connected(void)
 char MQTT_Loop(void)
 {
 	Check_Sim(_eDIRESCT_CHECK);
+	Reading_Time = _kSET;
 	Check_GSM_Signal();
+	Reading_Time = _kRESET;
 	if(_sRuble_Parameters.Sim_Check == _eSIM_NOT_INSERTED)
 	{
 		return 0;
 	}
-	
 	/*Reset_Buffer();
-	
 	_kSERIAL_AT.println(F("AT+CGREG?"));
 	if(!_kSEND_AT_COMMAND(NULL,"+CGREG: 1,1","+CGREG: 1,5",3000,2))
 	{
@@ -1325,7 +1325,6 @@ char MQTT_Loop(void)
 		_kSERIAL_AT.println(F("AT+CGREG=1"));
 		_kSEND_AT_COMMAND(NULL,"OK",NULL,3000,2);
 		_kDELAY_MS(2000);
-		
 		Reset_Buffer();
 		_kSERIAL_AT.println(F("AT+CGREG?"));
 		if(!_kSEND_AT_COMMAND(NULL,"+CGREG: 1,1","+CGREG: 1,5",3000,2))
@@ -1432,10 +1431,6 @@ char Send_AT_Command(char* ATcommand, char* expected_answer, char* expected_answ
 		temp_data[0] = 0x1A;
 		_kSERIAL_AT.print((char *)temp_data);
 	}
-	
-	
-	//sprintf((char *)_gRecvd_Data,"%s",(char *)_gPub_Buff);
-	
 	return answer;
 }
 

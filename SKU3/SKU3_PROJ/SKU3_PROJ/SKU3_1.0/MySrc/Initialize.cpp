@@ -751,7 +751,7 @@ void Faults_Handler(void)
 				}
 			}
 		}
-		return ;
+		return;
 	}
 	
 	
@@ -992,15 +992,9 @@ void Faults_Handler(void)
 
 unsigned char Check_Phase(void)
 {
-	return 0;
-	// 	if(_kGPIO_GET(_kPHASE_DETECTION_SWITCH))  /* if there is signal phase configuration */
-	// 	{
-	// 		return 0;
-	// 	}
+	//return 0;
 	
-	//if(0)
-	//if(_kGPIO_GET(_kDEBUG_PIN) /*|| _sRuble_Parameters.Update_Local_Date[2] == 70*/)
-	if(_kGPIO_GET(_kPHASE_DETECTION) /*|| _sRuble_Parameters.Update_Local_Date[2] == 70*/)   /* If any phase is not there */
+	if(_kGPIO_GET(_kPHASE_DETECTION))   /* If any phase is not there */
 	// 	if(_kGPIO_GET(_kR_PHASE_INPUT) == _kHIGH ||
 	// 	_kGPIO_GET(_kY_PHASE_INPUT) == _kHIGH  ||
 	// 	_kGPIO_GET(_kB_PHASE_INPUT) == _kHIGH)
@@ -1053,16 +1047,6 @@ bool Check_Sim(char check_status)
 	
 	counter++;
 	
-	/*if(_kSERIAL_AT.available() != 0)
-	{
-		if(_sRuble_Parameters.Sim_Check == _eSIM_INSERTED)
-		{
-			return 1;
-		}
-		
-		return 0;
-	}*/
-	
 	switch(check_status)
 	{
 		case _eDIRESCT_CHECK:
@@ -1114,7 +1098,7 @@ void Clear_Serial_Data(void)
 	previous = millis();
 	while (_kSERIAL_AT.available() > 0 && ((millis() - previous) < 100))
 	{
-		_kSERIAL_AT.read(); // clears the buffer
+		_kSERIAL_AT.read(); 
 	}
 }
 
