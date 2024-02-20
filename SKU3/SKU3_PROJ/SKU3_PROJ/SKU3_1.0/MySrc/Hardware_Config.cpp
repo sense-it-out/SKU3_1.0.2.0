@@ -934,17 +934,18 @@ int _kGSM_SIG_STRENGTH(void)
 	_kSERIAL_AT.println(F("AT+CSQ"));
 	if(_kSEND_AT_COMMAND(NULL, "OK",  NULL,2000,1))
 	{
-		if(strstr((char *)_gRecvd_Data,"+CS") != 0)     // +CSQ
+		if(strstr((char *)_gPub_Buff,"+CS") != 0)     // +CSQ
 		{
 			for(i=0;i<20;i++)
 			{
-				if(_gRecvd_Data[i] == '+' && _gRecvd_Data[i+4] == ':')
+				if(_gPub_Buff[i] == '+' && _gPub_Buff[i+4] == ':')
 				{
 					break;
 				}
 			}
 			i = i+6;
-			sig_stren = (_gRecvd_Data[i] - 0x30) * 10 + (_gRecvd_Data[i+1] - 0x30);
+			sig_stren = (_gPub_Buff[i] - 0x30) * 10 + (_gPub_Buff[i+1] - 0x30);
+			memset((char *)_gPub_Buff,0,sizeof(_gPub_Buff));
 			return sig_stren;
 		}
 		
@@ -954,6 +955,7 @@ int _kGSM_SIG_STRENGTH(void)
 		_kSERAIL_MON_WRITE_NO_LN("CSQ RETEURN 0 ");
 		_kSERIAL_MON_CLEAR();
 	}
+	memset((char *)_gPub_Buff,0,sizeof(_gPub_Buff));
 	return 0;	
 }
 
@@ -963,6 +965,7 @@ bool Gsm_Init(void)
 	_kSERIAL_AT.println(F("AT"));
 	if(_kSEND_AT_COMMAND(NULL, "OK",  NULL,1000,2))
 	{
+		Reset_Buffer();
 		_kSERIAL_AT.println(F("AT+IPREX=9600"));
 		delay(1000);
 // 		_kSERIAL_AT.println(F("AT+IPREX"));
@@ -985,7 +988,6 @@ bool Check_Gsm_Connection(void)
 	Reset_Buffer();
 	_kSERIAL_AT.println(F("AT+CNMP=38"));
 	Send_AT_Command(NULL, "OK",  NULL,5000,2);
-	_kSEND_AT_COMMAND(NULL,"OK",NULL,4000,2);
 	
 	Reset_Buffer();
 	_kSERIAL_AT.println(F("AT+CREG=1"));
@@ -1045,9 +1047,10 @@ void Get_Operator_Name(char *sim_operator)
 
 bool Gprs_Connect(char *apn)
 {
-	char temp_data[100];
+	char temp_data[40];
 	
 	//sprintf((char *)temp_data,"AT+CGSOCKCONT=1,\"IP\",\"%s\"",_sNetwork_and_Usr_Info.Ruble_Sim_APN);
+	Reset_Buffer();
 	sprintf((char *)temp_data,"AT+CGDCONT=1,\"IP\",\"%s\"",_sNetwork_and_Usr_Info.Ruble_Sim_APN);
 	_kSEND_AT_COMMAND(temp_data,"OK",NULL,1000,1);
 	
@@ -1154,7 +1157,9 @@ bool MQTT_Publish(unsigned char *topic, unsigned char *payload)
 {
 	char temp_data[30];
 	
+
 	memset(temp_data,0,sizeof(temp_data));
+	Reset_Buffer();
 	sprintf(temp_data,"AT+CMQTTTOPIC=0,%d",strlen((char *)topic));
 	if(_kSEND_AT_COMMAND(temp_data,">",NULL,3000,2))
 	{
@@ -1162,6 +1167,7 @@ bool MQTT_Publish(unsigned char *topic, unsigned char *payload)
 		_kSERIAL_AT.println((char *)topic);
 		
 		memset(temp_data,0,sizeof(temp_data));
+		Reset_Buffer();
 		sprintf(temp_data,"AT+CMQTTPAYLOAD=0,%d",strlen((char *)payload));
 		if(_kSEND_AT_COMMAND(temp_data,">",NULL,3000,2))
 		{
@@ -1195,7 +1201,7 @@ bool MQTT_SUBSCRIBE(char topic[])
 	{
 		_kSERIAL_MON_WRITE(topic,strlen(topic));
 	}
-	
+	Reset_Buffer();
 	sprintf(temp_data,"AT+CMQTTSUBTOPIC=0,%d,1",strlen(topic));
 	
 	if(_kSEND_AT_COMMAND(temp_data,">",NULL,3000,2))
@@ -1244,6 +1250,7 @@ bool MQTT_Connect(const char  client_id[], const char  user_name[], const char  
 	_kSERIAL_AT.println(F("AT+CMQTTSTART"));
 	_kSEND_AT_COMMAND(NULL,"+CMQTTSTART: 0","+CMQTTSTART: 23",3000,2);
 	
+	Reset_Buffer();
 	sprintf(temp_data,"AT+CMQTTACCQ=0,\"%s\",0",_kRUBLE_ID);
 	_kSEND_AT_COMMAND(temp_data,"OK",NULL,3000,1);
 	

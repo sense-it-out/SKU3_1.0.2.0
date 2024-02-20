@@ -163,7 +163,6 @@ void Get_Local_Time(void)
 		
 		memset((char *)_gPub_Buff,0,sizeof(_gPub_Buff));
 		
-		
 		_kSERAIL_MON_WRITE("my date : ");
 		_kSERIAL_MON_PRINT_NUM(_sRuble_Parameters.Update_Local_Date[0]);
 		_kSERIAL_MON_CLEAR();
@@ -185,6 +184,7 @@ void Get_Local_Time(void)
 			return;
 		}
 	}
+	
 }
 
 

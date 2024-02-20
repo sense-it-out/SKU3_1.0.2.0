@@ -118,12 +118,9 @@ bool Init_Broker(void)
  		//_sRuble_Parameters.Display_Update |= _eREGISTERING_TO_SERVER;
  		Display_Update_1();   // 20/1/2022
 		 
-		
-		//memset((char *)_gPub_Buff,0,sizeof(_gPub_Buff));
 		memset((char *)_gRecvd_Data,0,sizeof(_gRecvd_Data));
 		memset((char *)temp_topic,0,sizeof(temp_topic));                                        /* clear the publish buff */
 		
-		//sprintf((char *)_gPub_Buff,"{\"status\": \"true\"}");                    /* store the payload */
 		sprintf((char *)_gRecvd_Data,"{\"status\": \"true\"}");
 		sprintf((char *)temp_topic,"SICCA/STATE/%s",_sRuble_Parameters.Ruble_ID);
 		//MQTT_Publish((unsigned char *)temp_topic,(unsigned char *)_gPub_Buff);   /* published to data to monitor registration */

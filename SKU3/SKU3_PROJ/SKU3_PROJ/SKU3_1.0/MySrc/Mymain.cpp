@@ -75,8 +75,8 @@ int main(void)
 	
 	Reading_Time = _kSET;
 	Get_Local_Time();
-	Reading_Time = _kRESET;
 	Check_GSM_Signal();
+	Reading_Time = _kRESET;
 	
 	Start_Display_In_Interrupt = 1;
    _sRuble_Parameters.Display_Refresh = _kSET;

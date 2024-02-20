@@ -71,7 +71,7 @@
 #define _kMEDIUM_AVG_LEN                                      4            /**< find the avg len */    
 #define _kMOVING_AVG_FRAME_SIZE                               10           /**< find the moving average len */
 
-#define _kRUBLE_ID                                          "CB0023"       /**< store the Ruble ID */
+#define _kRUBLE_ID                                          "CB010"       /**< store the Ruble ID */
 #define _kRETRY_TO_SEND_VALVE                                 3
 #define _kWAIT_DUE_TO_SERVER_NOT_RECHABLE                    1*30
 #define _kRETRY_TO_CONNECT_SERVER                             3
