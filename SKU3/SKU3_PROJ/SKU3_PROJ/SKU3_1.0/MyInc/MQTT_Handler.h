@@ -74,9 +74,6 @@ typedef struct Network_and_Usr_Info
 	char Ruble_Sim_APN[20];
 	char Ruble_SIM_No[11];
 	char User_Sim_No[11];
-	//char Client_Id[10];
-	//char User_Name[10];
-	//char User_Password[10];
 }Network_and_Usr_Info;
 
 enum _eCOMMON_TOPICS

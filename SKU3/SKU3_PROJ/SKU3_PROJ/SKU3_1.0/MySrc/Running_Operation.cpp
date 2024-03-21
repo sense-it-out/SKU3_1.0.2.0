@@ -3949,12 +3949,14 @@ void Pub_Sub_Data(char* topic, unsigned char * payload, unsigned int len, unsign
 							_kSERAIL_MON_WRITE("Calibration over ruled");
 							_sRuble_Parameters.Do_Calibration = _kSET;
 							_sRuble_Parameters.Calibration_Over_Ruled = _kSET;
+							send_feedback = _kSET;
 						}
 						else
 						{
 							_sRuble_Parameters.Calibration_Over_Ruled = 2;
 							_sRuble_Parameters.By_Pass_CT = _kRESET;
 							_kEEPROM_WRITE(_kCT_BY_PASS,_sRuble_Parameters.By_Pass_CT);
+							send_feedback = _kSET;
 						}
 					}
 				}
@@ -5735,11 +5737,11 @@ bool Start_Extra_Plot_Operation(unsigned char check_plot)
 				{
 					_kGPIO_SET(_kPUMP_1,_kPUMP_ON);      /* turn ON the pump */
 				}
-				My_Delay(30000);
+				//My_Delay(30000);
 				if((_kGPIO_GET(_kPUMP_2) != _kPUMP_ON))     /* check weather pump is already ON */
 				{
 					_kGPIO_SET(_kPUMP_2,_kPUMP_ON);
-				}	
+				}
 			}
 			else
 			{

@@ -63,11 +63,6 @@ int main(void)
 	
 	Param_Initialization();
 	
-	if(_sRuble_Parameters.SMS_Alert_Start == 0x08)
-	{
-		//_kSEND_SMS(_sNetwork_and_Usr_Info.User_Sim_No,"RUBLE RESTART");
-	}
-	
 	while (_kSERAIL_AT_CHECK())
 	{
 		_kSERIAL_AT_READ();
@@ -75,13 +70,12 @@ int main(void)
 	
 	Reading_Time = _kSET;
 	Get_Local_Time();
-	Check_GSM_Signal();
 	Reading_Time = _kRESET;
-	
+	Check_GSM_Signal();
+
 	Start_Display_In_Interrupt = 1;
    _sRuble_Parameters.Display_Refresh = _kSET;
    
-	//Display_Update_1();    
 	tickcount = g_uTick;
 	_sRuble_Parameters.Line_Fault_Flag = _kRESET;
 	_sRuble_Parameters.Pump_On_Flag =_ePUMP_OFF;
@@ -104,7 +98,6 @@ int main(void)
 		_kSERIAL_MON_PRINT_NUM(_sSchedules.Days_In_Between_Schedules);
 		_kSERIAL_MON_CLEAR();
 	}
-	//Turn_Off_All_Pump_For_Safety();
 	
 	_sSchedules.Shedule_Run_Status_Is_Triggered  = _kRESET;
 	_sRuble_Parameters.Immediately_Turn_Off_Pump = _kRESET;
@@ -112,9 +105,7 @@ int main(void)
 	_sRuble_Parameters.Electricity_Status        = _kON;
 	
 	Select_Operation_Mode();
-	
-	//_sRuble_Parameters.By_Pass_CT = _kRESET;
-	//_sExtra_Plot[(_kFLUSH_PLOT_NUMBER-_kEXTRA_PLOT_START_FROM)].Status         = _kRESET;
+
 	_sExtra_Plot[(_kFLUSH_PLOT_NUMBER-_kEXTRA_PLOT_START_FROM)].Auto_Operation = _kRESET;
 	_sExtra_Plot[(_kFLUSH_PLOT_NUMBER-_kEXTRA_PLOT_START_FROM)].On_Off_Status  = _kRESET;
 	_sExtra_Plot[(_kFLUSH_PLOT_NUMBER-_kEXTRA_PLOT_START_FROM)].Status = _eSTOP_EXTRA_PLOT_OPERATION;
@@ -127,23 +118,16 @@ int main(void)
 	_sExtra_Plot[(_kFOOGER_PLOT_NUMBER-_kEXTRA_PLOT_START_FROM)].Status = _kRESET;
 	_sExtra_Plot[(_kFOOGER_PLOT_NUMBER-_kEXTRA_PLOT_START_FROM)].Publish_status = _kRESET;
 	
-	
-	
 	delay(5000);
 	Reading_Time = _kSET;
 	Get_Local_Time();
 	Reading_Time = _kRESET;
 	
-// 	wdt_disable();  /* Disable the watchdog and wait for more than 2 seconds */
-// 	delay(3000);  /* Done so that the Arduino doesn't keep resetting infinitely in case of wrong configuration */
-// 	wdt_enable(WDTO_8S);
-	//wdt_reset();
-	
+
 	unsigned int temp;
 	if(_sExtra_Plot[_kFLUSH_PLOT_NUMBER - _kEXTRA_PLOT_START_FROM].Min_Valve[0] !=0 &&
 	(_sExtra_Plot[_kFLUSH_PLOT_NUMBER - _kEXTRA_PLOT_START_FROM].Extra_Plot_Number == _kFLUSH_PLOT_NUMBER))
 	{
-		//_sRuble_Parameters.Pump_Run_Timer_for_flush = _kRESET;
 		temp =  _sExtra_Plot[_kFLUSH_PLOT_NUMBER - _kEXTRA_PLOT_START_FROM].Max_Value[0];
 		_sSchedules.Flush_Schedule_In_Every = temp *3600;
 		temp = _sExtra_Plot[_kFLUSH_PLOT_NUMBER - _kEXTRA_PLOT_START_FROM].Min_Valve[0];
@@ -169,25 +153,21 @@ int main(void)
 			_g_1Sec_Time = _kRESET;
 			tickcount = g_uTick;
 			timer_count++;
-			
 			_gWdt_Counter = 0;
 			
 			Publish_Data();
-			//Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_ePUBLSIH_DATA);
 			
 			Lora_Operation();
 			
 			Run_Extra_Plot_Operation();	
 			
-			Run_Operation();             /* Run the operation as per the selected mode */
-			
-		   /* read strength of GSM signal and update the display update variable */
+			Run_Operation();             
 			
 			Display_Update_1();
 			
 			Keeps_Monitor_Server_Connection();	
 			
-			if(timer_count > 80)           /* update in every 1 minute */
+			if(timer_count > 80)          
 			{
 				timer_count = 0;
 				Reading_Time = _kSET;
@@ -196,7 +176,7 @@ int main(void)
 				Hard_Coded_Flush_Valve(_kON);	
 			}
 			
-			Wireless_Motor_Enable_Disable_Check();  /* changed */
+			Wireless_Motor_Enable_Disable_Check(); 
 			
 			Handle_Wireless_Pump();
 			
@@ -208,7 +188,7 @@ int main(void)
 			
 			Flush_Controlling();
 			
-//			Debug_Check();
+			Debug_Check();
 			
 			Calibration_Of_Pump();
 			
@@ -223,10 +203,8 @@ int main(void)
 			if(Seperate_Out_Sub_Data())
 			{
 				Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-				//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
 			}
-		}
-			
+		}	
 	}
         
 	return 0;

@@ -995,9 +995,9 @@ unsigned char Check_Phase(void)
 	//return 0;
 	
 	if(_kGPIO_GET(_kPHASE_DETECTION))   /* If any phase is not there */
-	// 	if(_kGPIO_GET(_kR_PHASE_INPUT) == _kHIGH ||
-	// 	_kGPIO_GET(_kY_PHASE_INPUT) == _kHIGH  ||
-	// 	_kGPIO_GET(_kB_PHASE_INPUT) == _kHIGH)
+// 	 	if(_kGPIO_GET(_kR_PHASE_INPUT) != _kHIGH ||
+// 	 	_kGPIO_GET(_kY_PHASE_INPUT) != _kHIGH  ||
+// 	 	_kGPIO_GET(_kB_PHASE_INPUT) != _kHIGH)
 	{
 		if(_sRuble_Parameters.Debug_Mode == _kSET)
 		{
@@ -1020,6 +1020,9 @@ unsigned char Check_Phase(void)
 	{
 		if(_gStart_Monitoring_Three_Phase < 61)
 		{
+// 			if(_kGPIO_GET(_kR_PHASE_INPUT) != _kHIGH ||
+// 			_kGPIO_GET(_kY_PHASE_INPUT) != _kHIGH  ||
+// 			_kGPIO_GET(_kB_PHASE_INPUT) != _kHIGH)
 			if(_kGPIO_GET(_kPHASE_DETECTION))
 			{
 				if(_sRuble_Parameters.Debug_Mode == _kSET)
@@ -1282,7 +1285,6 @@ char Pump_Run_Monitoring(void)
 		{
 			_sRuble_Parameters.Pump_Is_Running_Or_Not = _kRESET;
 		}
-		
 	}
 }
 
@@ -1311,11 +1313,109 @@ void My_Delay(unsigned int my_delay)
 			if(Seperate_Out_Sub_Data())
 			{
 				Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-				//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
 			}
 		}
 	}
 }	
+
+
+unsigned char Monitor_Wired_Valves(void)
+{
+	unsigned char adc_value;
+	adc_value = 3;
+	unsigned char number_of_valves;
+	number_of_valves = 0; 
+	unsigned int required_current;
+	
+	if(_sRuble_Parameters.Irrigating_Plot !=0 || _sExtra_Plot[_kFLUSH_PLOT_NUMBER - _kEXTRA_PLOT_START_FROM].Auto_Operation == _kSET)
+	{
+		/* check the adc value */
+		if(adc_value < 2)
+		{
+			_sPump_Parameter.Irrigation_Status = 1;
+		}
+	}
+	
+	if(_sRuble_Parameters.Irrigating_Plot !=0 || _sExtra_Plot[_kFLUSH_PLOT_NUMBER - _kEXTRA_PLOT_START_FROM].Auto_Operation == _kSET)
+	{
+		/* check number of valves on */
+		if(_sRuble_Parameters.Irrigating_Plot !=0 && _sExtra_Plot[_kFLUSH_PLOT_NUMBER - _kEXTRA_PLOT_START_FROM].Auto_Operation == _kSET)
+		{
+			number_of_valves += 2;
+		}
+		else
+		{
+			number_of_valves += 1;
+		}
+		
+		if(_sRuble_Parameters.Irrigating_Plot !=0 && _sExtra_Plot[_kFLUSH_PLOT_NUMBER - _kEXTRA_PLOT_START_FROM].Auto_Operation == _kRESET)
+		{
+			unsigned char tank_number_list[_kNUMBER_OF_SCHEDULES*_kMAX_FERTILIZER_TANK], tank_number;
+			
+			for(unsigned char temp_tank_number=0 ; temp_tank_number < _kMAX_FERTILIZER_TANK; temp_tank_number++)
+			{
+				_sSchedules.Running_Tank[temp_tank_number] = _kRESET;
+			}
+			
+			for(int i=0; i<(_kNUMBER_OF_SCHEDULES*_kMAX_FERTILIZER_TANK); i++)
+			{
+				tank_number_list[i] = 0;
+			}
+			
+			
+			for(int check_tank =0; check_tank<(_kNUMBER_OF_SCHEDULES*_kMAX_FERTILIZER_TANK) ; check_tank++)
+			{
+				if(check_tank == 0)
+				{
+					if(tank_number_list[check_tank] == 0)
+					{
+						tank_number_list[check_tank] = _sSchedules.Fertilizer_Tank_Number[check_tank];
+					}
+				}
+				else
+				{
+					for(int check_tank2 =0; check_tank2<_kNUMBER_OF_SCHEDULES*_kMAX_FERTILIZER_TANK; check_tank2++)
+					{
+						if(tank_number_list[check_tank2] == _sSchedules.Fertilizer_Tank_Number[check_tank])
+						{
+							break;
+						}
+						if(tank_number_list[check_tank2] == 0)
+						{
+							tank_number_list[check_tank2] = _sSchedules.Fertilizer_Tank_Number[check_tank];
+							break;
+						}
+					}
+				}
+			}
+			if(_sRuble_Parameters.Debug_Mode == _kSET)
+			{
+				_kSERAIL_MON_WRITE("tank number list for wired valves monitor");
+				_kSERIAL_MON_CLEAR();
+			}
+			
+			for(int tank_number=0; tank_number_list[tank_number] != 0; tank_number++)
+			{
+				_kSERIAL_MON_PRINT_NUM(tank_number_list[tank_number]);
+				
+				if(_sExtra_Plot[tank_number_list[tank_number]-_kEXTRA_PLOT_START_FROM].On_Off_Status == _kRESET)
+				{
+					if(_sExtra_Plot[tank_number_list[tank_number]-_kEXTRA_PLOT_START_FROM].Status != _kSCHEDULER_OFF)
+					{
+							number_of_valves++;
+					}	
+				}
+			}
+		}
+	}
+	
+	required_current = number_of_valves * _kCURRENT_FOR_ONE_VALVE;
+	
+	if(adc_value < required_current)
+	{
+		_sPump_Parameter.Irrigation_Status = 1;
+	}
+}
 
 
 

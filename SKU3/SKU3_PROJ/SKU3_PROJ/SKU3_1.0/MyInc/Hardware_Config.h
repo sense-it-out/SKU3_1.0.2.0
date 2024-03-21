@@ -242,9 +242,10 @@
 
 
 
-#define _kR_PHASE_INPUT              23   /* Digital input pin to read R phase status */
-#define _kY_PHASE_INPUT              24   /* Digital intput pin to read Y phase status */
-#define _kB_PHASE_INPUT              25   /* Digital intput pin to read B phase status */
+#define _kR_PHASE_INPUT              A3   /* Digital input pin to read R phase status */
+#define _kY_PHASE_INPUT              A4   /* Digital intput pin to read Y phase status */
+#define _kB_PHASE_INPUT              A5   /* Digital intput pin to read B phase status */
+
 #define _kLORA_INTERRUPT_PIN          2   /* Digital intput pin to check Interrupt of lora */
                 
 

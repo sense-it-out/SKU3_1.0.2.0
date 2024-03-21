@@ -43,7 +43,9 @@ void Check_GSM_Signal(void)
 		
 	if(_sRuble_Parameters.Sim_Check == _eSIM_INSERTED)
 	{
-		temp_sig_strenght = _kGSM_SIG_STRENGTH();   /* get the signal strength */		
+		Reading_Time = _kSET;
+		temp_sig_strenght = _kGSM_SIG_STRENGTH();   /* get the signal strength */	
+		Reading_Time = _kRESET;	
 		_kSERIAL_MON_PRINT_NUM(temp_sig_strenght);
 	}
 	else

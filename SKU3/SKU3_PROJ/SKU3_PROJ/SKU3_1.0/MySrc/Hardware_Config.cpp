@@ -58,7 +58,7 @@ void Initialise_Hardware(void)
 	
 	
 	lcd.setCursor(0,1);
-	lcd.print(F("  FV : SKU3_1.0.0.1 "));
+	lcd.print(F("  FV : SKU3_1.0.2.1 "));
 	
 	lcd.setCursor(0,2);
 	lcd.print(F("                    "));
@@ -146,6 +146,11 @@ void Initialise_Hardware(void)
 	_sRuble_Parameters.Wired_valve_List[21]  = _kVALVE_22;
 	_sRuble_Parameters.Wired_valve_List[22]  = _kVALVE_23;
 	_sRuble_Parameters.Wired_valve_List[23]  = _kVALVE_24;
+	
+	/************************** RYB input ***************************/
+	_kGPIO_MODE(_kR_PHASE_INPUT, _kINPUT_PULLUP);
+	_kGPIO_MODE(_kY_PHASE_INPUT, _kINPUT_PULLUP);
+	_kGPIO_MODE(_kB_PHASE_INPUT, _kINPUT_PULLUP);
 	
 	for(i=0;i<_kMAX_WIRED_VALVE;i++)  
 	{
@@ -1040,9 +1045,12 @@ bool Check_Gsm_Connection(void)
 void Get_Operator_Name(char *sim_operator)
 {
 	Reset_Buffer();
+	Reading_Time = _kSET;
 	_kSERIAL_AT.println(F("AT+CSPN?"));
 	_kSEND_AT_COMMAND(NULL,"OK",NULL,3000,2);
-	strcpy((char *)sim_operator,(char *)_gRecvd_Data);
+	strcpy((char *)sim_operator,(char *)_gPub_Buff);
+	memset((char *)_gPub_Buff,0,sizeof(_gPub_Buff));
+	Reading_Time = _kRESET;
 }
 
 bool Gprs_Connect(char *apn)
@@ -1317,9 +1325,9 @@ bool Is_MQTT_Connected(void)
 char MQTT_Loop(void)
 {
 	Check_Sim(_eDIRESCT_CHECK);
-	Reading_Time = _kSET;
+	//Reading_Time = _kSET;
 	Check_GSM_Signal();
-	Reading_Time = _kRESET;
+	//Reading_Time = _kRESET;
 	if(_sRuble_Parameters.Sim_Check == _eSIM_NOT_INSERTED)
 	{
 		return 0;
