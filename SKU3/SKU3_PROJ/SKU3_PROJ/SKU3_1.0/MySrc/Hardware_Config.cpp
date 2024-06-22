@@ -58,7 +58,7 @@ void Initialise_Hardware(void)
 	
 	
 	lcd.setCursor(0,1);
-	lcd.print(F("  FV : SKU3_1.0.2.1 "));
+	lcd.print(F("  FV : SKU3_1.0.2.0 "));
 	
 	lcd.setCursor(0,2);
 	lcd.print(F("                    "));
@@ -1585,6 +1585,8 @@ bool Seperate_Out_Sub_Data(void)
 	increment_len = 0;
 	track_len =0;
 	topic_payload_len = 0;
+	
+	
 	while(_gPub_Buff[increment_len] !=0)
 	{
 		increment_len++;

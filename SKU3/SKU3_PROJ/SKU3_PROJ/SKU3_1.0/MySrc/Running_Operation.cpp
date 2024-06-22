@@ -875,15 +875,24 @@ void Run_Operation(void)
 									_kSERAIL_MON_WRITE("Mode: Timer Mode, Irrigation Related Fault occur 2");
 									_kSERIAL_MON_CLEAR();
 								}
-								
-								if(_sRuble_Parameters.Pump_Selected_For_Irrigation == _kWIRED_PUMP_NUMBER && _sRuble_Parameters.Line_Fault_Flag == _kSET)
+								if(_sRuble_Parameters.Dry_Run_Flag == _kSET)
 								{
-									_sRuble_Parameters.Timer_Mode_Wait_Timer = 4*60;
+									_sRuble_Parameters.Dry_Run_Flag = _kRESET;
+									_sRuble_Parameters.Timer_Mode_Wait_Timer = 60*60;
 								}
 								else
 								{
-									_sRuble_Parameters.Timer_Mode_Wait_Timer = _kRETRY_TIMER_IN_TIMER_MODE;
+									if(_sRuble_Parameters.Pump_Selected_For_Irrigation == _kWIRED_PUMP_NUMBER && _sRuble_Parameters.Line_Fault_Flag == _kSET)
+									{
+										_sRuble_Parameters.Timer_Mode_Wait_Timer = 4*60;
+									}
+									else
+									{
+										_sRuble_Parameters.Timer_Mode_Wait_Timer = _kRETRY_TIMER_IN_TIMER_MODE;
+									}
 								}
+								
+									
 							}
 							
 							_sRuble_Parameters.Operation_Status = _eOPERATION_STAT_SUSPENDED;
@@ -3124,45 +3133,7 @@ void Pub_Sub_Data(char* topic, unsigned char * payload, unsigned int len, unsign
 												_kSERIAL_MON_CLEAR();
 											}
 										
-											if(temp_plot <= _kMAX_LIRA_SENSOR_NODE)
-											{
-												switch(temp_array[i][7])
-												{
-													case 0x31:
-													{
-														_sLira_Node_Param[temp_plot-1].Euro_Valve_Group[i] = 101;
-														if(_sRuble_Parameters.Debug_Mode == _kSET)
-														{
-															_kSERAIL_MON_WRITE_NO_LN("valve 1 of euro controller new");
-															Serial.println();
-															_kSERIAL_MON_CLEAR();
-														}
-													}break;
-												
-													case 0x32:
-													{
-														_sLira_Node_Param[temp_plot-1].Euro_Valve_Group[i] = 102;
-														if(_sRuble_Parameters.Debug_Mode == _kSET)
-														{
-															_kSERAIL_MON_WRITE_NO_LN("valve 2 of euro controller new");
-															Serial.println();
-															_kSERIAL_MON_CLEAR();
-														}
-													}break;
-												
-													case 0x33:
-													{
-														_sLira_Node_Param[temp_plot-1].Euro_Valve_Group[i] = 103;
-														if(_sRuble_Parameters.Debug_Mode == _kSET)
-														{
-															_kSERAIL_MON_WRITE_NO_LN("valve 3 of euro controller new");
-															Serial.println();
-															_kSERIAL_MON_CLEAR();
-														}
-													}break;
-												}
-											}
-											else if(temp_plot > (_kMAX_PLOTS_LIMIT+_kMAX_LIRA_SENSOR_NODE))
+											if(temp_plot > (_kMAX_PLOTS_LIMIT+_kMAX_LIRA_SENSOR_NODE))
 											{
 												switch(temp_array[i][7])
 												{

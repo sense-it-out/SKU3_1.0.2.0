@@ -71,13 +71,13 @@
 #define _kMEDIUM_AVG_LEN                                      4            /**< find the avg len */    
 #define _kMOVING_AVG_FRAME_SIZE                               10           /**< find the moving average len */
 
-#define _kRUBLE_ID                                          "CB0023"       /**< store the Ruble ID */
+#define _kRUBLE_ID                                          "CB0202"       /**< store the Ruble ID */
 #define _kRETRY_TO_SEND_VALVE                                 3
 #define _kWAIT_DUE_TO_SERVER_NOT_RECHABLE                    1*30
 #define _kRETRY_TO_CONNECT_SERVER                             3
 #define _kCT_AVERAGE_TURNS                                   1480
 #define _kCT_CALIBRATION_FACTOR                               6
-#define _kCHECK_REGISTRATION                                  1    //8
+#define _kCHECK_REGISTRATION                                  3    //8
 #define _kSTART_MONITORING_PUMP_FAULTS_TIMER                  120
 #define _kRESUME_OPERATION_FOGGER                            10*60
 
@@ -241,6 +241,7 @@ typedef struct Ruble_Parameters
 	unsigned char Switch_To_Battery;
 	unsigned char Debug_Mode;
 	unsigned char Calibration_Over_Ruled;
+	unsigned char Dry_Run_Flag;
 	
 }Ruble_Parameters;
 

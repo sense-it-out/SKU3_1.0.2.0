@@ -740,10 +740,16 @@ void Faults_Handler(void)
 				   (_sWireless_Pump_Param[_sRuble_Parameters.Pump_Selected_For_Irrigation-2].Indication_Of_Faults & _ePUMP_NOT_WORKING)  == _ePUMP_NOT_WORKING /*||
 				   _sRuble_Parameters.Update_Local_Date[2] == 70*/)
 				{
+					
 					if(_sRuble_Parameters.Debug_Mode == _kSET)
 					{
 						_kSERAIL_MON_WRITE("Wireless Pump Fault ocuure............ ");
 						_kSERIAL_MON_PRINT_NUM(_sWireless_Pump_Param[_sRuble_Parameters.Pump_Selected_For_Irrigation-2].Indication_Of_Faults);
+					}
+					
+					if((_sWireless_Pump_Param[_sRuble_Parameters.Pump_Selected_For_Irrigation-2].Indication_Of_Faults & _eDRY_RUN_STATUS) == _eDRY_RUN_STATUS)
+					{
+						_sRuble_Parameters.Dry_Run_Flag = _kSET;
 					}
 					_sPump_Parameter.Irrigation_Status = _eWIRELESS_PUMP_FAIL_FAULT;
 					_sPump_Parameter.Irrigation_Status = _eIRRIG_STAT_LINE_FAULT;
@@ -909,6 +915,7 @@ void Faults_Handler(void)
 							_kSERAIL_MON_WRITE("Pump Dry Run");
 							_kSERIAL_MON_CLEAR();
 						}
+						_sRuble_Parameters.Dry_Run_Flag = _kSET;
 						_sPump_Parameter.Irrigation_Status = _eIRRIG_STAT_DRY_RUN;
 						_gfault_Occure = _kFAULT_RESET_TIMER;
 						_sGSM_Query.SMS_Alert |=  _eDRY_RUN;

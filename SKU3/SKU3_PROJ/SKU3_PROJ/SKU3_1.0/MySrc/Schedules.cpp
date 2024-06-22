@@ -2596,13 +2596,21 @@ void Schedules_Monitoring(void)
 											}
 											if(_sPump_Parameter.Irrigation_Status)
 											{
-												if(_sRuble_Parameters.Pump_Selected_For_Irrigation == _kWIRED_PUMP_NUMBER && _sRuble_Parameters.Line_Fault_Flag == _kSET)
+												if(_sRuble_Parameters.Dry_Run_Flag == _kSET)
 												{
-													_sSchedules.Scheduler_Retry_Timer = 4*60;
+													_sRuble_Parameters.Dry_Run_Flag = _kRESET;
+													_sSchedules.Scheduler_Retry_Timer = 60*60;
 												}
 												else
 												{
-													_sSchedules.Scheduler_Retry_Timer = _kSCHEDULE_RETRY_TIMER;
+													if(_sRuble_Parameters.Pump_Selected_For_Irrigation == _kWIRED_PUMP_NUMBER && _sRuble_Parameters.Line_Fault_Flag == _kSET)
+													{
+														_sSchedules.Scheduler_Retry_Timer = 4*60;
+													}
+													else
+													{
+														_sSchedules.Scheduler_Retry_Timer = _kSCHEDULE_RETRY_TIMER;
+													}
 												}
 											}
 											else
