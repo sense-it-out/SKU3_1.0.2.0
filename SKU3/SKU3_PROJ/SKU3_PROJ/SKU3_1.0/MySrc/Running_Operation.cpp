@@ -4224,7 +4224,7 @@ void Publish_Data(void)
 			Transmit_Buff[F("valveStatus")] = _sEuro_Valve_Param[_sRuble_Parameters.Last_Valve].Euro_Valve_Online;  /* store EURO valve ONLINE/OFFLINE */
 			Transmit_Buff[F("vBat")] = _sEuro_Valve_Param[_sRuble_Parameters.Last_Valve].Euro_Battery_Level;        /* store the battery level */
 			Transmit_Buff[F("valveOpen")] = _sEuro_Valve_Param[_sRuble_Parameters.Last_Valve].Euro_Valve_Status;    /* store valve status ON/OFF */
-			Transmit_Buff.prettyPrintTo((char *)_gPub_Buff, sizeof(_gPub_Buff));           /* copy the JSON formatted data into the publish buffer */
+			Transmit_Buff.prettyPrintTo((char *)pub_data, sizeof(pub_data));           /* copy the JSON formatted data into the publish buffer */
 			
 			memset((char *)_gRecvd_Data,0,sizeof(_gRecvd_Data));
 			sprintf((char *)_gRecvd_Data,"SICCA/VALVE/DATA/%s", _sEuro_Valve_Param[_sRuble_Parameters.Last_Valve].Euro_Valve_ID);  /* copy the topic including id */
