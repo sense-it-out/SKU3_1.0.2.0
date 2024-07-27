@@ -3281,6 +3281,8 @@ void Fertilizer_Tank_Monitoring(void)
 		return;
 	}
 	
+	
+	
 	for(tank_number = 0; tank_number < _kMAX_FERTILIZER_TANK; tank_number++)
 	{
 		if(!_sSchedules.Tank_On_Retry[tank_number])
@@ -4223,9 +4225,6 @@ char Turn_Off_All_Tank_For_Safety(void)
 		{
 			if(Extra_Plot_Valve_Grouping_Handler(_kOFF, tank_number_list[tank_number]-_kEXTRA_PLOT_START_FROM))
 			{
-				//_kSERAIL_MON_WRITE("tank number list with tank number array : ");
-				//_kSERIAL_MON_PRINT_NUM(_sSchedules.Fertilizer_Tank_Number[tank_number]-_kEXTRA_PLOT_START_FROM);
-				
 				if(_sExtra_Plot[tank_number_list[tank_number]-_kEXTRA_PLOT_START_FROM].Status != _kSCHEDULER_OFF)
 				{
 					if(_sRuble_Parameters.Debug_Mode == _kSET)
@@ -4242,7 +4241,6 @@ char Turn_Off_All_Tank_For_Safety(void)
 				}
 				
 			}
-			//return 1;
 		}
 	}
 	
