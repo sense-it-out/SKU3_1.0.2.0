@@ -588,13 +588,12 @@ int Calibration_Of_Pump(void)
 	unsigned char answer =0;
 	float filter_data[5],filter_data_1;
 	char i,j;
+	unsigned char pub_data[40];
 	
 	timeout = 10000;
 	
 	//_sRuble_Parameters.Do_Calibration = _kSET;
 	unsigned char temp_topic[40];
-	
-	
 	
 	
 	if(_sRuble_Parameters.Do_Calibration == _kSET)
@@ -603,20 +602,20 @@ int Calibration_Of_Pump(void)
 		
 		if(_sRuble_Parameters.Pump_Selected_For_Irrigation > 1)
 		{
-			memset((char *)_gPub_Buff,0,sizeof(_gPub_Buff));
+			memset((char *)pub_data,0,sizeof(pub_data));
 			if(Wireless_Pump_On_Off(_eDO_CALIBRATION,_sRuble_Parameters.Pump_Selected_For_Irrigation - 2))
 			{
-				sprintf((char *)_gPub_Buff,(const char *)"{\"success\": \"true\"}");
+				sprintf((char *)pub_data,(const char *)"{\"success\": \"true\"}");
 			}
 			else
 			{
-				sprintf((char *)_gPub_Buff,(const char *)"{\"success\": \"false\"}");
+				sprintf((char *)pub_data,(const char *)"{\"success\": \"false\"}");
 			}
 			
 			memset((char *)temp_topic,0,sizeof(temp_topic));
 			sprintf((char *)temp_topic,"SICCA/CALIBRATE/FEEDBACK/%s",_sRuble_Parameters.Ruble_ID);
 			
-			_kMQTT_PUB((unsigned char *)temp_topic,(unsigned char *)_gPub_Buff);
+			_kMQTT_PUB((unsigned char *)temp_topic,(unsigned char *)pub_data);
 			
 			return 1;
 		}
@@ -656,22 +655,22 @@ int Calibration_Of_Pump(void)
 			}	
 		}while ((answer == 0) && ((millis() - previous) < timeout));
 		
-		memset((char *)_gPub_Buff,0,sizeof(_gPub_Buff));
+		memset((char *)pub_data,0,sizeof(pub_data));
 		if(answer)
 		{
 			_sRuble_Parameters.By_Pass_CT = _kSET;
 			_kEEPROM_WRITE(_kCT_BY_PASS,_sRuble_Parameters.By_Pass_CT);
-			sprintf((char *)_gPub_Buff,(const char *)"{\"success\": \"true\"}");	
+			sprintf((char *)pub_data,(const char *)"{\"success\": \"true\"}");	
 		}
 		else
 		{
-			sprintf((char *)_gPub_Buff,(const char *)"{\"success\": \"false\"}");
+			sprintf((char *)pub_data,(const char *)"{\"success\": \"false\"}");
 		}
 		
 		memset((char *)temp_topic,0,sizeof(temp_topic));
 		sprintf((char *)temp_topic,"SICCA/CALIBRATE/FEEDBACK/%s",_sRuble_Parameters.Ruble_ID);
 		
-		_kMQTT_PUB((unsigned char *)temp_topic,(unsigned char *)_gPub_Buff);
+		_kMQTT_PUB((unsigned char *)temp_topic,(unsigned char *)pub_data);
 	}
 	else
 	{
@@ -692,22 +691,22 @@ int Calibration_Of_Pump(void)
 				}
 			}while ((answer == 0) && ((millis() - previous) < timeout));
 			
-			memset((char *)_gPub_Buff,0,sizeof(_gPub_Buff));
+			memset((char *)pub_data,0,sizeof(pub_data));
 			if(answer)
 			{
 				_sRuble_Parameters.By_Pass_CT = _kSET;
 				_kEEPROM_WRITE(_kCT_BY_PASS,_sRuble_Parameters.By_Pass_CT);
-				sprintf((char *)_gPub_Buff,(const char *)"{\"success\": \"true\"}");
+				sprintf((char *)pub_data,(const char *)"{\"success\": \"true\"}");
 			}
 			else
 			{
-				sprintf((char *)_gPub_Buff,(const char *)"{\"success\": \"false\"}");
+				sprintf((char *)pub_data,(const char *)"{\"success\": \"false\"}");
 			}
 			
 			memset((char *)temp_topic,0,sizeof(temp_topic));
 			sprintf((char *)temp_topic,"SICCA/CALIBRATE/FEEDBACK/%s",_sRuble_Parameters.Ruble_ID);
 			
-			_kMQTT_PUB((unsigned char *)temp_topic,(unsigned char *)_gPub_Buff);
+			_kMQTT_PUB((unsigned char *)temp_topic,(unsigned char *)pub_data);
 			_sWireless_Pump_Param[_sRuble_Parameters.Do_Calibration -2].Response_To_Ruble &= ~_eCALIBARATION_SUCCESS;
 			_sWireless_Pump_Param[_sRuble_Parameters.Do_Calibration -2].Response_To_Ruble &= ~_eCALIBRATION_FAIL;
 		}
