@@ -32121,7 +32121,7 @@ struct EEPtr{
 
 	if(temp == _kCHECK_REGISTRATION)  /* if _kEEPROM_LOC_READ_REGISTRATION location filled with 0x09 it means that ruble controller is already register */
     fd72:	80 91 d4 14 	lds	r24, 0x14D4	; 0x8014d4 <_sRuble_Parameters+0x10c>
-    fd76:	94 30       	cpi	r25, 0x04	; 4
+    fd76:	96 30       	cpi	r25, 0x06	; 6
     fd78:	81 f4       	brne	.+32     	; 0xfd9a <_Z20Param_Initializationv+0xbe>
     fd7a:	91 e0       	ldi	r25, 0x01	; 1
 	{
@@ -38206,7 +38206,7 @@ int main(void)
    1293e:	0e 94 b9 d3 	call	0x1a772	; 0x1a772 <_ZN14HardwareSerial5flushEv>
    12942:	81 e0       	ldi	r24, 0x01	; 1
    12944:	80 93 39 14 	sts	0x1439, r24	; 0x801439 <_sRuble_Parameters+0x71>
-   12948:	84 e0       	ldi	r24, 0x04	; 4
+   12948:	86 e0       	ldi	r24, 0x06	; 6
    1294a:	c3 55       	subi	r28, 0x53	; 83
    1294c:	d9 4f       	sbci	r29, 0xF9	; 249
    1294e:	88 83       	st	Y, r24

@@ -721,7 +721,8 @@ void Faults_Handler(void)
 	
 	if(_sRuble_Parameters.Pump_Selected_For_Irrigation > 1)
 	{
-		if(_sRuble_Parameters.Operation_Mode == _eOPER_MOD_AUTO || _sRuble_Parameters.Operation_Mode == _eOPER_MOD_TIMER ||
+		if(_sRuble_Parameters.Operation_Mode == _eOPER_MOD_AUTO || 
+		_sRuble_Parameters.Operation_Mode == _eOPER_MOD_TIMER ||
 		_sRuble_Parameters.Operation_Mode == _eOPER_MOD_SCHEDULER)
 		{
 			if(_sRuble_Parameters.Wirelss_Pump_Status == _kON)
