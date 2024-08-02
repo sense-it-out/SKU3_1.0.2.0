@@ -552,7 +552,7 @@ ISR(TIMER1_COMPA_vect)
 		
 		if(_gStart_Wdt == _kSET)
 		{
-			if(_gWdt_Counter < 240)
+			if(_gWdt_Counter < 360)
 			{
 				wdt_reset();
 			}
