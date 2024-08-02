@@ -1446,7 +1446,7 @@ char Valve_Grouping_Handler(unsigned char on_off)
 					if(total_valve_number & hex_array[k])
 					{
 						data_send_counter = 0;
-						while(data_send_counter < _kRETRY_TO_SEND_VALVE)
+						while(data_send_counter < 1 /*_kRETRY_TO_SEND_VALVE*/)
 						{
 							data_send_counter++;
 							/****************** if any valve on then turn off that valve first *******************************/
@@ -1624,7 +1624,7 @@ char Valve_Grouping_Handler(unsigned char on_off)
 					if(total_valve_number & hex_array[k])
 					{
 						data_send_counter = 0;
-						while(data_send_counter < _kRETRY_TO_SEND_VALVE)
+						while(data_send_counter < 1 /*_kRETRY_TO_SEND_VALVE*/)
 						{
 							data_send_counter++;
 							
