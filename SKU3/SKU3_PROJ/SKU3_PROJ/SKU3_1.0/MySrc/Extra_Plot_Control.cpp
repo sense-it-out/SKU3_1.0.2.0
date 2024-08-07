@@ -1085,25 +1085,25 @@ char Valve_Grouping_Handler_For_wireless_Pump(unsigned char Target_Plot_Num, uns
 							_kLORA_SEND_DATA(count);
 							
 							
-							if(Subscribed_data_check())
-							{
-								if(Seperate_Out_Sub_Data())
-								{
-									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-								}
-							}
+// 							if(Subscribed_data_check())
+// 							{
+// 								if(Seperate_Out_Sub_Data())
+// 								{
+// 									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 								}
+// 							}
 							
 							if(_kCHEK_DATA_AVAILABLE_TIMEOUT(3000))    /* wait for 3 sec to wait the data from the EURO valve */
 							{
 								_kLORA_RECV_DATA();            /* check the received data */
 								
-								if(Subscribed_data_check())
-								{
-									if(Seperate_Out_Sub_Data())
-									{
-										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-									}
-								}
+// 								if(Subscribed_data_check())
+// 								{
+// 									if(Seperate_Out_Sub_Data())
+// 									{
+// 										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 									}
+// 								}
 								
 								//_kLORA_RECV_DATA();            /* check the received data */
 								
@@ -1270,25 +1270,25 @@ char Valve_Grouping_Handler_For_wireless_Pump(unsigned char Target_Plot_Num, uns
 							Display_Update_1();
 							_kLORA_SEND_DATA(count);
 							
-							if(Subscribed_data_check())
-							{
-								if(Seperate_Out_Sub_Data())
-								{
-									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-								}
-							}
+// 							if(Subscribed_data_check())
+// 							{
+// 								if(Seperate_Out_Sub_Data())
+// 								{
+// 									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 								}
+// 							}
 							
 							if(_kCHEK_DATA_AVAILABLE_TIMEOUT(3000))    /* wait for 3 sec to wait the data from the EURO valve */
 							{
 								_kLORA_RECV_DATA();            /* check the received data */
 								
-								if(Subscribed_data_check())
-								{
-									if(Seperate_Out_Sub_Data())
-									{
-										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-									}
-								}
+// 								if(Subscribed_data_check())
+// 								{
+// 									if(Seperate_Out_Sub_Data())
+// 									{
+// 										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 									}
+// 								}
 								
 								//RF95_setModeRx_Continuous();
 								
@@ -1507,14 +1507,14 @@ char Valve_Grouping_Handler_For_wireless_Pump(unsigned char Target_Plot_Num, uns
 						
 							while(data_send_counter < _kRETRY_TO_SEND_VALVE)
 							{
-								if(Subscribed_data_check())
-								{
-									if(Seperate_Out_Sub_Data())
-									{
-										//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-									}
-								}
+// 								if(Subscribed_data_check())
+// 								{
+// 									if(Seperate_Out_Sub_Data())
+// 									{
+// 										//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 									}
+// 								}
 								data_send_counter++;
 							
 								if(_sRuble_Parameters.Debug_Mode == _kSET)
@@ -1531,14 +1531,14 @@ char Valve_Grouping_Handler_For_wireless_Pump(unsigned char Target_Plot_Num, uns
 									/**************************** update the received data in buff lora rx_tx **********************/
 									if(_kLORA_RECV_DATA())            /* check the received data */
 									{
-										if(Subscribed_data_check())
-										{
-											if(Seperate_Out_Sub_Data())
-											{
-												//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-												Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-											}
-										}
+// 										if(Subscribed_data_check())
+// 										{
+// 											if(Seperate_Out_Sub_Data())
+// 											{
+// 												//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 												Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 											}
+// 										}
 										//RF95_setModeRx_Continuous();
 										/* check the id get matched to the valve or not */
 										if(_sRuble_Parameters.Debug_Mode == _kSET)
@@ -1867,14 +1867,14 @@ char Valve_Grouping_Handler_For_wireless_Pump(unsigned char Target_Plot_Num, uns
 						
 						while(data_send_counter < _kRETRY_TO_SEND_VALVE)
 						{
-							if(Subscribed_data_check())
-							{
-								if(Seperate_Out_Sub_Data())
-								{
-									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-								}
-							}
+// 							if(Subscribed_data_check())
+// 							{
+// 								if(Seperate_Out_Sub_Data())
+// 								{
+// 									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 								}
+// 							}
 							data_send_counter++;
 							
 							if(_sRuble_Parameters.Debug_Mode == _kSET)
@@ -1891,14 +1891,14 @@ char Valve_Grouping_Handler_For_wireless_Pump(unsigned char Target_Plot_Num, uns
 								/**************************** update the received data in buff lora rx_tx **********************/
 								if(_kLORA_RECV_DATA())            /* check the received data */
 								{
-									if(Subscribed_data_check())
-									{
-										if(Seperate_Out_Sub_Data())
-										{
-											//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-											Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-										}
-									}
+// 									if(Subscribed_data_check())
+// 									{
+// 										if(Seperate_Out_Sub_Data())
+// 										{
+// 											//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 											Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 										}
+// 									}
 									//RF95_setModeRx_Continuous();
 									/* check the id get matched to the valve or not */
 									if(_sRuble_Parameters.Debug_Mode == _kSET)

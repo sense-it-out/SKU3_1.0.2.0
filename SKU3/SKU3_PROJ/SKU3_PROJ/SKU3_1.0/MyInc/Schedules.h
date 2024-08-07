@@ -58,12 +58,12 @@ typedef struct Schedules
 	unsigned char Fertilizer_Tank_Status[_kMAX_SCHEDULE_PLOT*_kMAX_FERTILIZER_TANK + 1];   //55
 	unsigned char Already_Fertilze_Status[_kMAX_SCHEDULE_PLOT*_kMAX_FERTILIZER_TANK + 1];  //55
 	
-	unsigned int  Tank_Run_Time[_kMAX_SCHEDULE_PLOT*_kMAX_FERTILIZER_TANK + 1];     //55*2
+	//unsigned int  Tank_Run_Time[_kMAX_SCHEDULE_PLOT*_kMAX_FERTILIZER_TANK + 1];     //55*2
 	unsigned int  Tank_Running_Date[_kMAX_SCHEDULE_PLOT*_kMAX_FERTILIZER_TANK + 1]; //55*2
 	
 	unsigned char Tank_On_Retry[_kMAX_FERTILIZER_TANK+1]; //4
 	unsigned char Fertilizer_On_Scheduler_Status;         //4
-	unsigned int  Fertilizer_Tank_Run_Timer[_kMAX_FERTILIZER_TANK + 1];  // 4*2
+	//unsigned int  Fertilizer_Tank_Run_Timer[_kMAX_FERTILIZER_TANK + 1];  // 4*2
 	unsigned char Running_Tank[_kMAX_FERTILIZER_TANK+1];        //4 
 	unsigned int  Tank_Running_Timer[_kMAX_FERTILIZER_TANK+1];  //4*2
 	

@@ -71,13 +71,13 @@
 #define _kMEDIUM_AVG_LEN                                      4            /**< find the avg len */    
 #define _kMOVING_AVG_FRAME_SIZE                               10           /**< find the moving average len */
 
-#define _kRUBLE_ID                                          "CB0002"       /**< store the Ruble ID */
-#define _kRETRY_TO_SEND_VALVE                                 3
+#define _kRUBLE_ID                                          "CB0023"       /**< store the Ruble ID */
+#define _kRETRY_TO_SEND_VALVE                                 2
 #define _kWAIT_DUE_TO_SERVER_NOT_RECHABLE                    1*30
 #define _kRETRY_TO_CONNECT_SERVER                             3
 #define _kCT_AVERAGE_TURNS                                   1480
 #define _kCT_CALIBRATION_FACTOR                               6
-#define _kCHECK_REGISTRATION                                  6    //8
+#define _kCHECK_REGISTRATION                                  2    //8
 #define _kSTART_MONITORING_PUMP_FAULTS_TIMER                  120
 #define _kRESUME_OPERATION_FOGGER                            10*60
 
@@ -186,7 +186,7 @@ typedef struct Ruble_Parameters
 	unsigned char Temp_Operation_Mode;
 	unsigned char Mode_Switch_Pos;                       /**< To read the mode switching switch status */
 	unsigned char lndications;                           /**< all led indications */
-	unsigned char Display_Buff[21];                      /**< Buffer to hold the display data */
+	//unsigned char Display_Buff[21];                      /**< Buffer to hold the display data */
 	unsigned char Update_Local_Time[3];                  /**< GSM time update request */
 	unsigned char Update_Local_Date[3];                  /**< DATE, MONTH, YEAR */
 	unsigned char Lora_Data_TX[20];                      /**< tx and rx to lira */

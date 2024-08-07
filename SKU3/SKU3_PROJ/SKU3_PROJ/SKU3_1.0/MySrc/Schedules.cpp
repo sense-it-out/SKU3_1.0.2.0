@@ -3189,10 +3189,12 @@ void Schedules_Monitoring(void)
 					
 					//_sSchedules.Which_Sheduler_Is_Running = _kRESET;  // 17/02/2023
 					
-						if(!Stop_Irrigation())       /* stops the irrigation if any faults occur */
-						{
-							_sRuble_Parameters.Operation_Status = _eOPERATION_STAT_OPRN_END;
-						}
+					if(!Stop_Irrigation())       /* stops the irrigation if any faults occur */
+					{
+						_sRuble_Parameters.Operation_Status = _eOPERATION_STAT_OPRN_END;
+					}
+					
+					
 					if(_sRuble_Parameters.Debug_Mode == _kSET)
 					{
 						_kSERAIL_MON_WRITE("Scheduler gets off 11 : ");
@@ -3207,7 +3209,6 @@ void Schedules_Monitoring(void)
 					_sSchedules.Which_Sheduler_Is_Running = _kRESET;  /* 17/02/2023reset the running schedule */
 					_sSchedules.All_Schedule_Run_Flag = _kSET;       /* all schedule are completed so set this flag */
 					_sSchedules.Shedule_Run_Status_Is_Triggered = _kRESET;  /* reset the trigger flag which earlier set by trigger time */
-					
 					_sSchedules.Schedule_Are_Started = _kRESET;
 					_sSchedules.all_schedule_done_flag = _kRESET;
 					
@@ -3227,9 +3228,6 @@ void Schedules_Monitoring(void)
 				if(_sSchedules.New_Schedules_Occur != _kRESET)
 				{
 					_sSchedules.New_Schedules_Occur = _kRESET;
-					
-					
-					
 					_sSchedules.Which_Sheduler_Is_Running = _kRESET;  /* 17/02/2023reset the running schedule */
 					_sSchedules.All_Schedule_Run_Flag = _kSET;       /* all schedule are completed so set this flag */
 					_sSchedules.Shedule_Run_Status_Is_Triggered = _kRESET;  /* reset the trigger flag which earlier set by trigger time */
@@ -3238,8 +3236,6 @@ void Schedules_Monitoring(void)
 					_sSchedules.New_Schedules_Occur = _kRESET;
 					_sSchedules.Scheduler_Retry_Timer = _kRESET;
 					_sSchedules.Pump_On_In_Scheduler = _kRESET;
-				
-				
 				
 					Edited_In_Schedule();
 				}
@@ -3487,14 +3483,14 @@ char Fertilizer_Tank_On_Off(unsigned char tank_number, unsigned char on_off)
 			
 			while(data_send_counter < _kRETRY_TO_SEND_VALVE)
 			{
-				if(Subscribed_data_check())
-				{
-					if(Seperate_Out_Sub_Data())
-					{
-						Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-						//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-					}
-				}
+// 				if(Subscribed_data_check())
+// 				{
+// 					if(Seperate_Out_Sub_Data())
+// 					{
+// 						Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 						//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 					}
+// 				}
 				data_send_counter++;
 				
 				_kSERAIL_MON_WRITE("Send On/off Command to EURO valve 1");
@@ -3508,14 +3504,14 @@ char Fertilizer_Tank_On_Off(unsigned char tank_number, unsigned char on_off)
 					if(_kLORA_RECV_DATA())            /* check the received data */
 					{
 						
-						if(Subscribed_data_check())
-						{
-							if(Seperate_Out_Sub_Data())
-							{
-								//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-								Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-							}
-						}
+// 						if(Subscribed_data_check())
+// 						{
+// 							if(Seperate_Out_Sub_Data())
+// 							{
+// 								//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 								Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 							}
+// 						}
 						
 						//RF95_setModeRx_Continuous();
 						/* check the id get matched to the valve or not */
@@ -3924,14 +3920,14 @@ char Doser_Pump_On_Off(unsigned char on_off)
 			
 			while(data_send_counter < _kRETRY_TO_SEND_VALVE)
 			{
-				if(Subscribed_data_check())
-				{
-					if(Seperate_Out_Sub_Data())
-					{
-						Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-						//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-					}
-				}
+// 				if(Subscribed_data_check())
+// 				{
+// 					if(Seperate_Out_Sub_Data())
+// 					{
+// 						Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 						//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 					}
+// 				}
 				data_send_counter++;
 				if(_sRuble_Parameters.Debug_Mode == _kSET)
 				{
@@ -3947,14 +3943,14 @@ char Doser_Pump_On_Off(unsigned char on_off)
 					if(_kLORA_RECV_DATA())            /* check the received data */
 					{
 						
-						if(Subscribed_data_check())
-						{
-							if(Seperate_Out_Sub_Data())
-							{
-								//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-								Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-							}
-						}
+// 						if(Subscribed_data_check())
+// 						{
+// 							if(Seperate_Out_Sub_Data())
+// 							{
+// 								//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 								Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 							}
+// 						}
 						//RF95_setModeRx_Continuous();
 						/* check the id get matched to the valve or not */
 						if(_sRuble_Parameters.Debug_Mode == _kSET)

@@ -17,7 +17,7 @@
 /********************************************* declare all macros ***************************************/
 
 #define _kTOTAL_VALVE                                         30
-#define _kMAX_EURO_VALVE                                      8
+#define _kMAX_EURO_VALVE                                      7
 #define _kMAX_WIRED_VALVE                                     24
 #define _kWIRED_VALVE_NUMBER                                  (_kTOTAL_VALVE -_kMAX_LIRA_SENSOR_NODE) + 1
 #define _kEURO_WILL_ACK_LEN

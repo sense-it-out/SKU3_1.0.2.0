@@ -1477,14 +1477,14 @@ char Valve_Grouping_Handler(unsigned char on_off)
 								_kSERIAL_MON_CLEAR();
 							}
 							
-							if(Subscribed_data_check())
-							{
-								if(Seperate_Out_Sub_Data())
-								{
-									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-								}
-							}
+// 							if(Subscribed_data_check())
+// 							{
+// 								if(Seperate_Out_Sub_Data())
+// 								{
+// 									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 								}
+// 							}
 							
 							Display_Update_1();   // 20/1/2022
 							_kLORA_SEND_DATA(count);
@@ -1493,14 +1493,14 @@ char Valve_Grouping_Handler(unsigned char on_off)
 							{
 								_kLORA_RECV_DATA();            /* check the received data */
 								
-								if(Subscribed_data_check())
-								{
-									if(Seperate_Out_Sub_Data())
-									{
-										//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-									}
-								}
+// 								if(Subscribed_data_check())
+// 								{
+// 									if(Seperate_Out_Sub_Data())
+// 									{
+// 										//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 									}
+// 								}
 								
 								id_len = _kRESET;
 								for(compare_id=0;compare_id<_kVALVE_ID_LEN;compare_id++)
@@ -1659,14 +1659,14 @@ char Valve_Grouping_Handler(unsigned char on_off)
 							
 							Display_Update_1();
 							
-							if(Subscribed_data_check())
-							{
-								if(Seperate_Out_Sub_Data())
-								{
-									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-								}
-							}
+// 							if(Subscribed_data_check())
+// 							{
+// 								if(Seperate_Out_Sub_Data())
+// 								{
+// 									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 								}
+// 							}
 							
 							_kLORA_SEND_DATA(count);
 							
@@ -1675,14 +1675,14 @@ char Valve_Grouping_Handler(unsigned char on_off)
 							{
 								_kLORA_RECV_DATA();            /* check the received data */
 								
-								if(Subscribed_data_check())
-								{
-									if(Seperate_Out_Sub_Data())
-									{
-										//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-									}
-								}
+// 								if(Subscribed_data_check())
+// 								{
+// 									if(Seperate_Out_Sub_Data())
+// 									{
+// 										//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 									}
+// 								}
 								id_len = _kRESET;
 								for(compare_id=0;compare_id<_kVALVE_ID_LEN;compare_id++)
 								{
@@ -1869,14 +1869,14 @@ char Valve_Grouping_Handler(unsigned char on_off)
 						
 						while(data_send_counter < _kRETRY_TO_SEND_VALVE)
 						{
-							if(Subscribed_data_check())
-							{
-								if(Seperate_Out_Sub_Data())
-								{
-									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-								}
-							}
+// 							if(Subscribed_data_check())
+// 							{
+// 								if(Seperate_Out_Sub_Data())
+// 								{
+// 									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 								}
+// 							}
 							data_send_counter++;
 							if(_sRuble_Parameters.Debug_Mode == _kSET)
 							{
@@ -1893,14 +1893,14 @@ char Valve_Grouping_Handler(unsigned char on_off)
 								if(_kLORA_RECV_DATA())            /* check the received data */
 								{
 									
-									if(Subscribed_data_check())
-									{
-										if(Seperate_Out_Sub_Data())
-										{
-											//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-											Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-										}
-									}
+// 									if(Subscribed_data_check())
+// 									{
+// 										if(Seperate_Out_Sub_Data())
+// 										{
+// 											//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 											Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 										}
+// 									}
 									
 									/* check the id get matched to the valve or not */
 									if(_sRuble_Parameters.Debug_Mode == _kSET)
@@ -2215,14 +2215,14 @@ char Valve_Grouping_Handler(unsigned char on_off)
 						
 						while(data_send_counter < _kRETRY_TO_SEND_VALVE)
 						{
-							if(Subscribed_data_check())
-							{
-								if(Seperate_Out_Sub_Data())
-								{
-									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-								}
-							}
+// 							if(Subscribed_data_check())
+// 							{
+// 								if(Seperate_Out_Sub_Data())
+// 								{
+// 									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 								}
+// 							}
 							data_send_counter++;
 							if(_sRuble_Parameters.Debug_Mode == _kSET)
 							{
@@ -2238,14 +2238,14 @@ char Valve_Grouping_Handler(unsigned char on_off)
 								/**************************** update the received data in buff lora rx_tx **********************/
 								if(_kLORA_RECV_DATA())            /* check the received data */
 								{
-									if(Subscribed_data_check())
-									{
-										if(Seperate_Out_Sub_Data())
-										{
-											//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-											Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-										}
-									}
+// 									if(Subscribed_data_check())
+// 									{
+// 										if(Seperate_Out_Sub_Data())
+// 										{
+// 											//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 											Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 										}
+// 									}
 									/* check the id get matched to the valve or not */
 									if(_sRuble_Parameters.Debug_Mode == _kSET)
 									{
@@ -3518,10 +3518,10 @@ void Pub_Sub_Data(char* topic, unsigned char * payload, unsigned int len, unsign
 				if(strcmp((char *)temp_sub_topic, topic) == 0)
 				{
 					plot_schedule_topic = _kRESET;
-					memset((char *)_sNetwork_and_Usr_Info.User_Sim_No,0, sizeof(_sNetwork_and_Usr_Info.User_Sim_No));
-					memset((char *)_sNetwork_and_Usr_Info.Ruble_SIM_No,0,sizeof(_sNetwork_and_Usr_Info.Ruble_SIM_No));
-					strcpy((char *) _sNetwork_and_Usr_Info.User_Sim_No,(const char *)temp_object[F("farmerNumber")]);
-					strcpy((char *) _sNetwork_and_Usr_Info.Ruble_SIM_No,(const char *)temp_object[F("deviceNumber")]);
+				//	memset((char *)_sNetwork_and_Usr_Info.User_Sim_No,0, sizeof(_sNetwork_and_Usr_Info.User_Sim_No));
+				//	memset((char *)_sNetwork_and_Usr_Info.Ruble_SIM_No,0,sizeof(_sNetwork_and_Usr_Info.Ruble_SIM_No));
+				//	strcpy((char *) _sNetwork_and_Usr_Info.User_Sim_No,(const char *)temp_object[F("farmerNumber")]);
+				//	strcpy((char *) _sNetwork_and_Usr_Info.Ruble_SIM_No,(const char *)temp_object[F("deviceNumber")]);
 					valve_num =  temp_object[F("sms")];
 					if(valve_num == 1)
 					{
@@ -3544,8 +3544,8 @@ void Pub_Sub_Data(char* topic, unsigned char * payload, unsigned int len, unsign
 						_sRuble_Parameters.SMS_Alert_Start = 0x09;
 						_kEEPROM_WRITE(_kEEPROM_SMS_ALERT_START,_sRuble_Parameters.SMS_Alert_Start);
 					}
-					_kEEPROM_WRITE(_kEEPROM_LOC_RUBLE_SIM_NUM,_sNetwork_and_Usr_Info.Ruble_SIM_No);
-					_kEEPROM_WRITE(_kEEPROM_LOC_USER_SIM_NUM, _sNetwork_and_Usr_Info.User_Sim_No);
+					//_kEEPROM_WRITE(_kEEPROM_LOC_RUBLE_SIM_NUM,_sNetwork_and_Usr_Info.Ruble_SIM_No);
+					//_kEEPROM_WRITE(_kEEPROM_LOC_USER_SIM_NUM, _sNetwork_and_Usr_Info.User_Sim_No);
 					send_feedback = _kSET;
 				}
 				
@@ -5358,10 +5358,10 @@ void Dummy_Data_Store(void)
 	//_kEEPROM_WRITE(_kEEPROM_LOC_COEFF_3,_sRuble_Parameters.Coeff_3);
 		 	 
 	/******************************************* update ruble sim no. ************************************/
-	_kEEPROM_WRITE(_kEEPROM_LOC_RUBLE_SIM_NUM,_sNetwork_and_Usr_Info.Ruble_SIM_No);	 	
+	//_kEEPROM_WRITE(_kEEPROM_LOC_RUBLE_SIM_NUM,_sNetwork_and_Usr_Info.Ruble_SIM_No);	 	
 		 	
 	/******************************************* update user sim no. ************************************/
-	_kEEPROM_WRITE(_kEEPROM_LOC_USER_SIM_NUM,_sNetwork_and_Usr_Info.User_Sim_No);	 	
+	//_kEEPROM_WRITE(_kEEPROM_LOC_USER_SIM_NUM,_sNetwork_and_Usr_Info.User_Sim_No);	 	
 		 	
 	/***************************************** update the sms alert ***********************************/
 	_sRuble_Parameters.SMS_Alert_Start = 0X09;
@@ -5437,10 +5437,10 @@ void Dummy_Data_Store(void)
 		_sSchedules.Fertilizer_Tank_Status[i] = _kRESET;
 	}
 	
-	for(i=0; i< _kNUMBER_OF_SCHEDULES*_kMAX_FERTILIZER_TANK + 1; i++)
-	{
-		_sSchedules.Tank_Run_Time[i] = _kRESET;
-	}
+// 	for(i=0; i< _kNUMBER_OF_SCHEDULES*_kMAX_FERTILIZER_TANK + 1; i++)
+// 	{
+// 		_sSchedules.Tank_Run_Time[i] = _kRESET;
+// 	}
 	
 	for(i=0; i< _kNUMBER_OF_SCHEDULES*_kMAX_FERTILIZER_TANK + 1; i++)
 	{
@@ -5454,10 +5454,10 @@ void Dummy_Data_Store(void)
 	
 	_sSchedules.Fertilizer_On_Scheduler_Status = _kRESET;
 	
-	for(i=0; i< _kMAX_FERTILIZER_TANK+1; i++)
-	{
-		_sSchedules.Fertilizer_Tank_Run_Timer[i] = _kRESET;
-	}
+// 	for(i=0; i< _kMAX_FERTILIZER_TANK+1; i++)
+// 	{
+// 		_sSchedules.Fertilizer_Tank_Run_Timer[i] = _kRESET;
+// 	}
 	
 	for(i=0; i< _kMAX_FERTILIZER_TANK+1; i++)
 	{
@@ -6077,14 +6077,14 @@ bool Extra_Plot_Valve_Grouping_Handler(unsigned char on_off, unsigned char check
 			
 			while(data_send_counter < _kRETRY_TO_SEND_VALVE)
 			{
-				if(Subscribed_data_check())
-				{
-					if(Seperate_Out_Sub_Data())
-					{
-						Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-						//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-					}
-				}
+// 				if(Subscribed_data_check())
+// 				{
+// 					if(Seperate_Out_Sub_Data())
+// 					{
+// 						Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 						//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 					}
+// 				}
 				data_send_counter++;
 				
 				if(_sRuble_Parameters.Debug_Mode == _kSET)
@@ -6095,14 +6095,14 @@ bool Extra_Plot_Valve_Grouping_Handler(unsigned char on_off, unsigned char check
 				
 				Display_Update_1();
 				
-				if(Subscribed_data_check())
-				{
-					if(Seperate_Out_Sub_Data())
-					{
-						//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-						Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-					}
-				}
+// 				if(Subscribed_data_check())
+// 				{
+// 					if(Seperate_Out_Sub_Data())
+// 					{
+// 						//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 						Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 					}
+// 				}
 				
 				_kLORA_SEND_DATA(count);
 				
@@ -6111,14 +6111,14 @@ bool Extra_Plot_Valve_Grouping_Handler(unsigned char on_off, unsigned char check
 					/**************************** update the received data in buff lora rx_tx **********************/
 					if(_kLORA_RECV_DATA())            /* check the received data */
 					{
-						if(Subscribed_data_check())
-						{
-							if(Seperate_Out_Sub_Data())
-							{
-								//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-								Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-							}
-						}
+// 						if(Subscribed_data_check())
+// 						{
+// 							if(Seperate_Out_Sub_Data())
+// 							{
+// 								//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 								Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 							}
+// 						}
 						//RF95_setModeRx_Continuous();
 						/* check the id get matched to the valve or not */
 						if(_sRuble_Parameters.Debug_Mode == _kSET)
@@ -6995,14 +6995,14 @@ unsigned char Plot_Status_List_Monitor(void)
 						
 							while(data_send_counter < _kRETRY_TO_SEND_VALVE)
 							{
-								if(Subscribed_data_check())
-								{
-									if(Seperate_Out_Sub_Data())
-									{
-										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-										//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-									}
-								}
+// 								if(Subscribed_data_check())
+// 								{
+// 									if(Seperate_Out_Sub_Data())
+// 									{
+// 										Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 										//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 									}
+// 								}
 								data_send_counter++;
 								if(_sRuble_Parameters.Debug_Mode == _kSET)
 								{
@@ -7019,14 +7019,14 @@ unsigned char Plot_Status_List_Monitor(void)
 									if(_kLORA_RECV_DATA())            /* check the received data */
 									{
 										
-										if(Subscribed_data_check())
-										{
-											if(Seperate_Out_Sub_Data())
-											{
-												//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-												Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-											}
-										}
+// 										if(Subscribed_data_check())
+// 										{
+// 											if(Seperate_Out_Sub_Data())
+// 											{
+// 												//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 												Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 											}
+// 										}
 										
 										//RF95_setModeRx_Continuous();
 										/* check the id get matched to the valve or not */
@@ -7384,14 +7384,14 @@ unsigned char Fogger_Status_List_Monitor(void)
 					
 						while(data_send_counter < _kRETRY_TO_SEND_VALVE)
 						{
-							if(Subscribed_data_check())
-							{
-								if(Seperate_Out_Sub_Data())
-								{
-									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-								}
-							}
+// 							if(Subscribed_data_check())
+// 							{
+// 								if(Seperate_Out_Sub_Data())
+// 								{
+// 									Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 									//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 								}
+// 							}
 							data_send_counter++;
 							if(_sRuble_Parameters.Debug_Mode == _kSET)
 							{
@@ -7407,14 +7407,14 @@ unsigned char Fogger_Status_List_Monitor(void)
 								/**************************** update the received data in buff lora rx_tx **********************/
 								if(_kLORA_RECV_DATA())            /* check the received data */
 								{
-									if(Subscribed_data_check())
-									{
-										if(Seperate_Out_Sub_Data())
-										{
-											//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
-											Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
-										}
-									}
+// 									if(Subscribed_data_check())
+// 									{
+// 										if(Seperate_Out_Sub_Data())
+// 										{
+// 											//mqttCallback((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff));
+// 											Pub_Sub_Data((char *)_gRecvd_Data, (unsigned char *)_gPub_Buff, strlen((const char*)_gPub_Buff),_eSUBSCRIBE_DATA);
+// 										}
+// 									}
 									//RF95_setModeRx_Continuous();
 									/* check the id get matched to the valve or not */
 									if(_sRuble_Parameters.Debug_Mode == _kSET)

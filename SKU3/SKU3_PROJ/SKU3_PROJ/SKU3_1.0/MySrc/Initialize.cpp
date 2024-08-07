@@ -365,11 +365,11 @@ void Read_EEPROM(void)
 	}
 	
 	/******************************************* update ruble sim no. ************************************/
-	_kEEPROM_READ(_kEEPROM_LOC_RUBLE_SIM_NUM,_sNetwork_and_Usr_Info.Ruble_SIM_No);
+	//_kEEPROM_READ(_kEEPROM_LOC_RUBLE_SIM_NUM,_sNetwork_and_Usr_Info.Ruble_SIM_No);
 	
 	
 	/******************************************* update user sim no. ************************************/
-	_kEEPROM_READ(_kEEPROM_LOC_USER_SIM_NUM,_sNetwork_and_Usr_Info.User_Sim_No);
+	//_kEEPROM_READ(_kEEPROM_LOC_USER_SIM_NUM,_sNetwork_and_Usr_Info.User_Sim_No);
 	
 	
 	/***************************************** Update coefficient 1 *************************************/

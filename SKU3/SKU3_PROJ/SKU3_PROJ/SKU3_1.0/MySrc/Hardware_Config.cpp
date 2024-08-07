@@ -2138,8 +2138,10 @@ void Display_Update_1(void)
 			{
 				if(_sRuble_Parameters.Irrigating_Plot)
 				{
-					sprintf((char *)_sRuble_Parameters.Display_Buff," PLOT %02d IS RUNNING ",_sRuble_Parameters.Irrigating_Plot);
-					_kLCD_BUFF_WRITE((char *)_sRuble_Parameters.Display_Buff,20,2,0);
+					unsigned char Display_Buff[21];
+					memset(Display_Buff,0,sizeof(Display_Buff));
+					sprintf((char *)Display_Buff," PLOT %02d IS RUNNING ",_sRuble_Parameters.Irrigating_Plot);
+					_kLCD_BUFF_WRITE((char *)Display_Buff,20,2,0);
 					
 					lcd.setCursor(0,3);
 					lcd.print(F("                    "));

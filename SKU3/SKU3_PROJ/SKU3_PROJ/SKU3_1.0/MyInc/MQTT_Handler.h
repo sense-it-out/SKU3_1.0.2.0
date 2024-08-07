@@ -72,8 +72,8 @@ typedef struct Broker_Info
 typedef struct Network_and_Usr_Info
 {
 	char Ruble_Sim_APN[20];
-	char Ruble_SIM_No[11];
-	char User_Sim_No[11];
+	//char Ruble_SIM_No[11];
+	//char User_Sim_No[11];
 }Network_and_Usr_Info;
 
 enum _eCOMMON_TOPICS
