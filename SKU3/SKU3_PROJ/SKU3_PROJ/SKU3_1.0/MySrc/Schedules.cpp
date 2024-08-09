@@ -5022,7 +5022,7 @@ unsigned char Do_Not_Repeat_Schedule(void)
 			}
 			if(check_for_repeat == 2)
 			{
-				for(unsigned char index_num=0; index_num<_kMAX_LIRA_SENSOR_NODE+1; index_num++)
+				for(unsigned char index_num=0; index_num<_kNUMBER_OF_SCHEDULES+1; index_num++)
 				{
 					_sSchedules.Scheduler_Already_Run[index_num]        = _sSchedules.First_Schedule_Irrigated_Date;
 					_sSchedules.Scheduler_Already_Run_Month[index_num]  = _sSchedules.First_Schedule_Irrigated_Month;
@@ -5090,7 +5090,6 @@ unsigned char Next_Day_Calculate(unsigned char date,unsigned char month)
 					{
 						return 2;
 					}
-					
 				}
 			}
 			else
