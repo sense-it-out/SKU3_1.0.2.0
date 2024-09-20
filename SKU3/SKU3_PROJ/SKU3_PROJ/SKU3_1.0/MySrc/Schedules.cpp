@@ -3238,6 +3238,7 @@ void Schedules_Monitoring(void)
 					_sSchedules.Pump_On_In_Scheduler = _kRESET;
 				
 					Edited_In_Schedule();
+					_kEEPROM_WRITE(_kEEPROM_SCHEDULE_DATA, _sSchedules);
 				}
 				
 				if(_sRuble_Parameters.Irrigating_Plot && _sRuble_Parameters.Operation_Mode == _eOPER_MOD_SCHEDULER)

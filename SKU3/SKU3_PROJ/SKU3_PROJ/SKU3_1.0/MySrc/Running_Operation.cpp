@@ -3321,7 +3321,8 @@ void Pub_Sub_Data(char* topic, unsigned char * payload, unsigned int len, unsign
 				{
 					unsigned temp  =  temp_object[F("code")];
 					plot_schedule_topic = _kRESET;
-				
+				    
+					//temp = _eVALVE_DELETE;
 					switch(temp)
 					{
 						case _eVALVE_DELETE:
@@ -3391,6 +3392,35 @@ void Pub_Sub_Data(char* topic, unsigned char * payload, unsigned int len, unsign
 											}
 										}
 									}
+									
+									
+									for(check_all_valves = 0; check_all_valves < _kNUMBER_OF_VALVE_CONNECT_TO_EURO+1; check_all_valves++)
+									{
+										for(i=0;i<_kMAX_EXTRA_PLOT;i++)
+										{
+											for(j=0;j<_kMAX_VALVE_FOR_1PLOT;j++)
+											{
+												if(_sExtra_Plot[i].Euro_Valve_Group[j] !=0 && _sExtra_Plot[i].Euro_Valve_Group[j] == (valve_num+1) + check_all_valves)
+												{
+													_sExtra_Plot[i].Euro_Valve_Group[j] = 0;
+													
+													
+												//	Lira_Data_EEPROM(i);
+													Exra_Plot_Data_EEPROM(i+1);
+													
+													if(_sRuble_Parameters.Debug_Mode == _kSET)
+													{
+														_kSERAIL_MON_WRITE_NO_LN("VALVE delete from Plot no.: ");
+														_kSERIAL_MON_CLEAR();
+														_kSERIAL_MON_PRINT_NUM(i+1);
+														_kSERIAL_MON_CLEAR();
+													}
+												}
+											}
+										}
+									}
+									
+									
 									break;
 								}
 							}
@@ -3405,7 +3435,7 @@ void Pub_Sub_Data(char* topic, unsigned char * payload, unsigned int len, unsign
 									_kSERIAL_MON_CLEAR();
 								}
 							}
-						
+							send_feedback = _kSET;
 						}break;
 					
 						case _ePLOT_DALETE:
@@ -3509,7 +3539,7 @@ void Pub_Sub_Data(char* topic, unsigned char * payload, unsigned int len, unsign
 					
 					}
 				
-					send_feedback = _kSET;
+					
 				}
 			
 				/*************************************************************** ruble controller set up *******************************************************/
