@@ -256,6 +256,11 @@ bool Init_Broker(void)
 
 bool Ping_to_Server(void)
 {
+	if(_gdo_not_perform_4g_oper)
+	{
+		return 0;
+	}
+	
 	Reset_Buffer();
    _kSERIAL_AT.println(F("ATE0"));
    Send_AT_Command(NULL, "OK",  NULL,3000,2);
@@ -316,6 +321,9 @@ bool Ping_to_Server(void)
 		
 		if(_kMQTT_CONNCET(_kMQTT_CLIENT_ID,_kMQTT_USER,_kMQTT_PASSWORD))
 		{
+			_gdo_not_perform_4g_oper = _kRESET;
+			reconnection_retry_count = _kRESET;
+			
 			if(_sRuble_Parameters.Debug_Mode == _kSET)
 			{
 				_kSERAIL_MON_WRITE("Connected To server");                /* for debugging purpose */
@@ -361,37 +369,45 @@ bool Ping_to_Server(void)
 		}
 		else
 		{
-			_sRuble_Parameters.lndications &= ~_eRUBL_INDI_SERVER_CONN;
-			_sRuble_Parameters.Display_Update |= _kDISP_NO_RANGE;
-			if(_sRuble_Parameters.Debug_Mode == _kSET)
+			reconnection_retry_count++;
+			if(reconnection_retry_count > 2)
 			{
-				_kSERAIL_MON_WRITE("Fail To connect the server");                /* for debugging purpose */
-				_kSERIAL_MON_CLEAR();
+				reconnection_retry_count = _kRESET;
+				_gdo_not_perform_4g_oper = 50 * 60;
 			}
-			
-			Reset_Buffer();
-			
-			if(restart_4g_module == _kRESET)
+			else
 			{
-				restart_4g_module = 60 * 60;
+				_sRuble_Parameters.lndications &= ~_eRUBL_INDI_SERVER_CONN;
+				_sRuble_Parameters.Display_Update |= _kDISP_NO_RANGE;
+				if(_sRuble_Parameters.Debug_Mode == _kSET)
+				{
+					_kSERAIL_MON_WRITE("Fail To connect the server");                /* for debugging purpose */
+					_kSERIAL_MON_CLEAR();
+				}
+				
+				Reset_Buffer();
 				_kSERIAL_AT.println(F("AT+CFUN=1,1"));
 				Send_AT_Command(NULL, "Call Ready",  NULL,10000,1);
 				_kDELAY_MS(10000);
+				/*}*/
+				
+				if(_sRuble_Parameters.Ruble_Registration_Status != _eRUBLE_REGISTERED)
+				{
+					_kDELAY_MS(12000);
+				}
+				
+				Reset_Buffer();
+				_kSERIAL_AT.println(F("ATE0"));
+				Send_AT_Command(NULL, "OK",  NULL,3000,2);
 			}
 			
-			if(_sRuble_Parameters.Ruble_Registration_Status != _eRUBLE_REGISTERED)
-			{
-				_kDELAY_MS(120000);
-			}
-			
-			Reset_Buffer();
-			 _kSERIAL_AT.println(F("ATE0"));
-			Send_AT_Command(NULL, "OK",  NULL,3000,2);
 			return 0;
 		}
 	}
 	else
 	{
+		reconnection_retry_count = _kRESET;
+		_gdo_not_perform_4g_oper = _kRESET;
 		return 1;
 	}
 }

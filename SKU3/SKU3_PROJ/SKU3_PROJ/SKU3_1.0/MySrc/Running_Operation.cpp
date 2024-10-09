@@ -4070,6 +4070,11 @@ void Pub_Sub_Data(char* topic, unsigned char * payload, unsigned int len, unsign
 
 void Publish_Data(void)
 {
+	
+	if(_gdo_not_perform_4g_oper)
+	{
+		return;
+	}
 	char /*temp_data[40],*/i=0;
 	static unsigned char retry = 0,ruble_data_success_counter = 0;
 	static unsigned int extra_plot_data_resend_timer = 0;

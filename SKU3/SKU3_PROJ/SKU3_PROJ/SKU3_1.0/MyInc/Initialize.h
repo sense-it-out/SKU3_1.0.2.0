@@ -544,7 +544,10 @@ extern unsigned int _gTime_To_Wait_Lora_Resp;
 extern unsigned int _gWait_Blower_Time;
 extern unsigned int _gfault_Occure;
 extern volatile unsigned char monitor_serial_start;
-extern volatile unsigned int restart_4g_module;
+//extern volatile unsigned int restart_4g_module;
+extern volatile unsigned int _gdo_not_perform_4g_oper;
+extern volatile unsigned char reconnection_retry_count;
+
 
 
 /**

@@ -400,9 +400,14 @@ ISR(TIMER1_COMPA_vect)
 	static unsigned int pub_ruble_data_counter;
 	static unsigned char tank_num,Wdt_Timer = 0;
 	
-	if(restart_4g_module)
+// 	if(restart_4g_module)
+// 	{
+// 		restart_4g_module--;
+// 	}
+
+	if(_gdo_not_perform_4g_oper)
 	{
-		restart_4g_module--;
+		_gdo_not_perform_4g_oper--;
 	}
 
 	if(_gfault_Occure)

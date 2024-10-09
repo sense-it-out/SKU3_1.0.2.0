@@ -25,7 +25,9 @@ volatile unsigned char _gTimer_For_Three_Phase_Testing;
 
 volatile unsigned int Interrupt_Time_Out;
 volatile unsigned char Reading_Time;
-volatile unsigned int restart_4g_module;
+//volatile unsigned int restart_4g_module;
+volatile unsigned int _gdo_not_perform_4g_oper;
+volatile unsigned char reconnection_retry_count;
 
 
 void Param_Initialization(void)
@@ -1075,13 +1077,13 @@ bool Check_Sim(char check_status)
 				Reset_Buffer();
 				_kSERIAL_AT.println((char *)temp_data);
 				
-				if(restart_4g_module == _kRESET)
-				{
-					restart_4g_module = 60 * 60;
+// 				if(restart_4g_module == _kRESET)
+// 				{
+					//restart_4g_module = 60 * 60;
 					_kSERIAL_AT.println(F("AT+CFUN=1,1"));
 					Send_AT_Command(NULL, "Call Ready",  NULL,10000,1);
 					_kDELAY_MS(10000);
-				}
+				/*}*/
 				 
 				 Reset_Buffer();
 				 _kSERIAL_AT.println(F("ATE0"));
