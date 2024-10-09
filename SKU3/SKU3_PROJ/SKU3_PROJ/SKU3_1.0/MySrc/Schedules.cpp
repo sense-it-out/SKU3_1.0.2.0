@@ -5674,7 +5674,7 @@ unsigned char Check_Time_For_Schedule_To_Trigger(unsigned char Case_Number, unsi
 					_kSERAIL_MON_WRITE("irrigating date upadte 5///////////////////////////////////////////");
 					_kSERIAL_MON_CLEAR();
 				}
-				if((_sSchedules.Which_Sheduler_Is_Running == 1) && (_sSchedules.Keep_Scheduler_Run_Timer == 0))
+				if((_sSchedules.Which_Sheduler_Is_Running == 1) && (_sSchedules.Keep_Scheduler_Run_Timer == 0) )
 				{
 					if(check_days == 2)
 					{

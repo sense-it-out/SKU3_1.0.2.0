@@ -539,11 +539,12 @@ extern Pump_Parameter   _sPump_Parameter;
 //extern const unsigned char _gauchCRCLo[100];
 extern volatile unsigned char _gPub_Buff[_kMAX_PUB_BUFF_SIZE];
 extern volatile unsigned char _gRecvd_Data[110];
-extern Extra_Plot      _sExtra_Plot[_kMAX_EXTRA_PLOT];
+extern Extra_Plot   _sExtra_Plot[_kMAX_EXTRA_PLOT];
 extern unsigned int _gTime_To_Wait_Lora_Resp;
 extern unsigned int _gWait_Blower_Time;
 extern unsigned int _gfault_Occure;
 extern volatile unsigned char monitor_serial_start;
+extern volatile unsigned int restart_4g_module;
 
 
 /**

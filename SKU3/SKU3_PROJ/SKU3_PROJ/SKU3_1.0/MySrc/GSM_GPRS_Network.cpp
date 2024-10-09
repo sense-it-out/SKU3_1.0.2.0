@@ -259,9 +259,14 @@ bool Gsm_Gprs_Network(void)
 				_kSERAIL_MON_WRITE("Fail to Connect GPRS");                /* for debugging purpose */
 				_kSERIAL_MON_CLEAR();
 				Reset_Buffer();
-				_kSERIAL_AT.println(F("AT+CFUN=1,1"));
-				Send_AT_Command(NULL, "Call Ready",  NULL,10000,1);
-				_kDELAY_MS(10000);
+				
+				if(restart_4g_module == _kRESET)
+				{
+					restart_4g_module = 60 * 60;
+					_kSERIAL_AT.println(F("AT+CFUN=1,1"));
+					Send_AT_Command(NULL, "Call Ready",  NULL,10000,1);
+					_kDELAY_MS(10000);
+				}
 				if(_sRuble_Parameters.Ruble_Registration_Status != _eRUBLE_REGISTERED)
 				{
 					_kDELAY_MS(120000);
@@ -290,9 +295,15 @@ bool Gsm_Gprs_Network(void)
 			_kSERIAL_MON_CLEAR();
 		}
 		Reset_Buffer();
-		_kSERIAL_AT.println(F("AT+CFUN=1,1"));
-		Send_AT_Command(NULL, "OK",  NULL,10000,1);
-		_kDELAY_MS(10000);
+		
+		if(restart_4g_module == _kRESET)
+		{
+			restart_4g_module = 60 * 60;
+			_kSERIAL_AT.println(F("AT+CFUN=1,1"));
+			Send_AT_Command(NULL, "Call Ready",  NULL,10000,1);
+			_kDELAY_MS(10000);
+		}
+		
 		if(_sRuble_Parameters.Ruble_Registration_Status != _eRUBLE_REGISTERED)
 		{
 			_kDELAY_MS(120000);
